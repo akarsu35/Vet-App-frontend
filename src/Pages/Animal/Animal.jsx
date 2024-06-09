@@ -7,12 +7,11 @@ import Alert from '@mui/material/Alert'
 import Loading from '../../Components/Loading/Loading'
 
 export default function Animal() {
-
   const [isUpdate, setIsUpdate] = useState(false) // Güncelleme formu durumu
 
   const [animals, setAnimals] = useState([]) // Hayvan durumu
   const [filteredAnimals, setFilteredAnimals] = useState([]) // Filtrelenmiş hayvan durumu
-  const [customers, setCustomers] = useState([])//?
+  const [customers, setCustomers] = useState([]) //?
 
   const [update, setUpdate] = useState(false) // Güncelleme durumu
   const [searchQuery, setSearchQuery] = useState('') //animal Arama sorgusu durumu
@@ -68,35 +67,37 @@ export default function Animal() {
     const fetchCustomers = async () => {
       try {
         const response = await axios.get(
-          
-            `${import.meta.env.VITE_APP_BASEURL}/api/v1/customers?pageNumber=0&pageSize=10`
+          `${
+            import.meta.env.VITE_APP_BASEURL
+          }api/v1/customers?pageNumber=0&pageSize=10`
         )
         setCustomers(response.data.content)
       } catch (error) {
         console.error('Error:', error)
-         setSnackbarMessage('customer'+error.message)
-         setSnackbarSeverity('error')
-         setIsSnackbar(true)
+        setSnackbarMessage('customer' + error.message)
+        setSnackbarSeverity('error')
+        setIsSnackbar(true)
       }
     }
 
     fetchCustomers()
   }, [update])
 
-  
   // Backend'ten hayvanları getirme isteği
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_APP_BASEURL}/api/v1/animals?pageNumber=0&pageSize=10`
+          `${
+            import.meta.env.VITE_APP_BASEURL
+          }api/v1/animals?pageNumber=0&pageSize=10`
         )
         setAnimals(response.data.content)
         setFilteredAnimals(response.data.content)
         setUpdate(true)
       } catch (error) {
         console.error('Error:', error)
-        setSnackbarMessage('animals '+error.message)
+        setSnackbarMessage('animals ' + error.message)
         setSnackbarSeverity('error')
         setIsSnackbar(true)
       }
@@ -106,7 +107,7 @@ export default function Animal() {
   }, [update])
 
   // Yeni hayvan giriş formu işlemleri
-  
+
   const handleNewAnimalInputChange = (e) => {
     const { name, value } = e.target
     if (name === 'customer.id') {
@@ -136,7 +137,7 @@ export default function Animal() {
   const handleAddNewAnimal = (e) => {
     e.preventDefault()
     axios
-      .post(`${import.meta.env.VITE_APP_BASEURL}/api/v1/animals`, newAnimal)
+      .post(`${import.meta.env.VITE_APP_BASEURL}api/v1/animals`, newAnimal)
       .then(() => {
         setUpdate(false)
         setSnackbarMessage('New Animal Added')
@@ -171,7 +172,7 @@ export default function Animal() {
   const handleDeleteAnimal = (e) => {
     const id = e.target.id
     axios
-      .delete(`${import.meta.env.VITE_APP_BASEURL}/api/v1/animals/${id}`)
+      .delete(`${import.meta.env.VITE_APP_BASEURL}api/v1/animals/${id}`)
       .then(() => setUpdate(false))
       .then(() => {
         setSnackbarMessage('Animal Deleted')
@@ -192,7 +193,7 @@ export default function Animal() {
     const { id } = updateAnimal
     axios
       .put(
-        `${import.meta.env.VITE_APP_BASEURL}/api/v1/animals/${id}`,
+        `${import.meta.env.VITE_APP_BASEURL}api/v1/animals/${id}`,
         updateAnimal
       )
       .then(() => {
@@ -227,7 +228,7 @@ export default function Animal() {
   }
 
   // Güncelleme formundaki input değişiklikleri
-  
+
   const handleUpdateAnimalInputChange = (e) => {
     const { name, value } = e.target
     if (name === 'customer.id') {
@@ -252,7 +253,6 @@ export default function Animal() {
       }))
     }
   }
-
 
   // Güncelleme butonuna tıklanınca
   const handleUpdateAnimalBtn = (e) => {
@@ -292,7 +292,7 @@ export default function Animal() {
       .get(
         `${
           import.meta.env.VITE_APP_BASEURL
-        }/api/v1/animals/searchByCustomerName?name=${customerName}&pageNumber=0&pageSize=10`
+        }api/v1/animals/searchByCustomerName?name=${customerName}&pageNumber=0&pageSize=10`
       )
       .then((response) => {
         setFilteredAnimals(response.data)
@@ -631,11 +631,10 @@ export default function Animal() {
               </tbody>
             </table>
           ) : (
-            <Loading/>
+            <Loading />
           )}
         </div>
       )}
     </div>
   )
 }
-
