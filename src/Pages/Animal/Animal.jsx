@@ -69,7 +69,7 @@ export default function Animal() {
         const response = await axios.get(
           `${
             import.meta.env.VITE_APP_BASEURL
-          }api/v1/customers?pageNumber=0&pageSize=10`
+          }/api/v1/customers?pageNumber=0&pageSize=10`
         )
         setCustomers(response.data.content)
       } catch (error) {
@@ -90,7 +90,7 @@ export default function Animal() {
         const response = await axios.get(
           `${
             import.meta.env.VITE_APP_BASEURL
-          }api/v1/animals?pageNumber=0&pageSize=10`
+          }/api/v1/animals?pageNumber=0&pageSize=10`
         )
         setAnimals(response.data.content)
         setFilteredAnimals(response.data.content)
@@ -137,7 +137,7 @@ export default function Animal() {
   const handleAddNewAnimal = (e) => {
     e.preventDefault()
     axios
-      .post(`${import.meta.env.VITE_APP_BASEURL}api/v1/animals`, newAnimal)
+      .post(`${import.meta.env.VITE_APP_BASEURL}/api/v1/animals`, newAnimal)
       .then(() => {
         setUpdate(false)
         setSnackbarMessage('New Animal Added')
@@ -172,7 +172,7 @@ export default function Animal() {
   const handleDeleteAnimal = (e) => {
     const id = e.target.id
     axios
-      .delete(`${import.meta.env.VITE_APP_BASEURL}api/v1/animals/${id}`)
+      .delete(`${import.meta.env.VITE_APP_BASEURL}/api/v1/animals/${id}`)
       .then(() => setUpdate(false))
       .then(() => {
         setSnackbarMessage('Animal Deleted')
@@ -193,7 +193,7 @@ export default function Animal() {
     const { id } = updateAnimal
     axios
       .put(
-        `${import.meta.env.VITE_APP_BASEURL}api/v1/animals/${id}`,
+        `${import.meta.env.VITE_APP_BASEURL}/api/v1/animals/${id}`,
         updateAnimal
       )
       .then(() => {
@@ -292,7 +292,7 @@ export default function Animal() {
       .get(
         `${
           import.meta.env.VITE_APP_BASEURL
-        }api/v1/animals/searchByCustomerName?name=${customerName}&pageNumber=0&pageSize=10`
+        }/api/v1/animals/searchByCustomerName?name=${customerName}&pageNumber=0&pageSize=10`
       )
       .then((response) => {
         setFilteredAnimals(response.data)
